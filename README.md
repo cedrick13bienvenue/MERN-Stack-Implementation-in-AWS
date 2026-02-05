@@ -40,3 +40,28 @@ sudo apt-get install -y nodejs
 
 > **Expected Output:** Running `node -v` and `npm -v` should display the installed versions.
 
+### 1.2 Application Code Setup
+
+* **Initialize Project Directory:**
+```bash
+mkdir Todo && cd Todo && npm init -y
+
+```
+
+
+
+> **Expected Output:** A `package.json` file should be generated in the directory.
+
+### 1.3 ExpressJS Installation
+
+* **Install Dependencies:**
+```bash
+npm install express dotenv
+touch index.js
+
+```
+
+
+
+---
+
