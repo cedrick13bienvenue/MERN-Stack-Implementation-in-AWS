@@ -65,3 +65,36 @@ touch index.js
 
 ---
 
+## Phase 2: Defining the API Routes
+
+### 2.1 Route Folder Setup
+
+* **Create Routes Directory and File:**
+```bash
+mkdir routes && cd routes && touch api.js
+
+```
+
+
+
+### 2.2 Implementing the API Endpoints
+
+* **Configure `api.js`:** Open the file and define the initial Task handling logic.
+```javascript
+const express = require ('express');
+const router = express.Router();
+
+router.get('/todos', (req, res, next) => { });
+router.post('/todos', (req, res, next) => { });
+router.delete('/todos/:id', (req, res, next) => { })
+
+module.exports = router;
+
+```
+
+
+
+> **Expected Output:** The code should define exported router modules for GET, POST, and DELETE actions.
+
+---
+
