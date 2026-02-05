@@ -137,3 +137,11 @@ module.exports = Todo;
 
 ---
 
+## Phase 4: Database Infrastructure (MongoDB Atlas)
+
+* **Cluster Provisioning:** Create a free tier cluster on MongoDB Atlas and set Network Access to `0.0.0.0/0`.
+
+> **Expected Output:** The Atlas dashboard should show an active cluster with a configured DB user.
+
+---
+
