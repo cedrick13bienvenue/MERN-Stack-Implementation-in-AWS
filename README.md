@@ -231,3 +231,19 @@ module.exports = router;
 > **Expected Output:** The backend is now fully integrated with MongoDB Atlas for real-time CRUD operations.
 
 ---
+
+## Phase 7: Testing the Backend API
+
+* **Start the Server:**
+```bash
+node index.js
+
+```
+
+
+
+> **Expected Output:** You should see your rows of data displayed in the terminal.
+
+> **Web Preview:** Navigating to `http://<IP>:5000/api/todos` should display an empty array or the tasks in JSON format.
+
+---
