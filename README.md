@@ -145,3 +145,89 @@ module.exports = Todo;
 
 ---
 
+## Phase 5: Database Connection and Security
+
+### 5.1 Create the .env File
+
+* **Store Connection String:**
+```bash
+cd ..
+touch .env && vim .env
+
+```
+
+
+Paste your Atlas string: `DB = 'mongodb+srv://<username>:<password>@cluster0.mongodb.net/myTodoDB'`.
+
+> **Expected Output:** Running `cat .env` should display your database credentials securely.
+
+---
+
+## Phase 6: Updating Backend Logic
+
+### 6.1 Finalizing `index.js`
+
+* **Full Backend Entry Point:**
+```javascript
+const express = require('express');
+const mongoose = require('mongoose');
+const routes = require('./routes/api');
+require('dotenv').config();
+
+const app = express();
+const port = process.env.PORT || 5000;
+
+mongoose.connect(process.env.DB)
+  .then(() => console.log(`Database connected successfully`))
+  .catch(err => console.log(err));
+
+app.use(express.json());
+app.use('/api', routes);
+
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
+
+```
+
+
+
+### 6.2 Completing API Routes (`api.js`)
+
+* **Update `routes/api.js` with Logic:**
+```javascript
+const express = require('express');
+const router = express.Router();
+const Todo = require('../models/todo');
+
+router.get('/todos', (req, res, next) => {
+  Todo.find({}, 'action')
+    .then(data => res.json(data))
+    .catch(next)
+});
+
+router.post('/todos', (req, res, next) => {
+  if (req.body.action) {
+    Todo.create(req.body)
+      .then(data => res.json(data))
+      .catch(next)
+  } else {
+    res.json({ error: "The input field is empty" })
+  }
+});
+
+router.delete('/todos/:id', (req, res, next) => {
+  Todo.findOneAndDelete({"_id": req.params.id})
+    .then(data => res.json(data))
+    .catch(next)
+});
+
+module.exports = router;
+
+```
+
+
+
+> **Expected Output:** The backend is now fully integrated with MongoDB Atlas for real-time CRUD operations.
+
+---
