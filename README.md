@@ -175,3 +175,78 @@ Validate the backend functionality before building the UI:
 >![Web Preview](screenshoots/4.png)
 
 ---
+
+## Phase 7: Frontend Development (React)
+
+### 7.1 React Scaffolding & Proxy
+
+```bash
+npx create-react-app client
+cd client && npm install axios
+
+```
+
+**Configure Proxy** in `client/package.json`:
+
+```json
+"proxy": "http://localhost:5000"
+
+```
+
+### 7.2 Main Components (`client/src/components/`)
+
+**1. Todo.js (State Manager):**
+
+```javascript
+import React, { Component } from 'react';
+import axios from 'axios';
+import Input from './Input';
+import ListTodo from './ListTodo';
+
+class Todo extends Component {
+  state = { todos: [] }
+  componentDidMount() { this.getTodos(); }
+  getTodos = () => {
+    axios.get('/api/todos').then(res => {
+      if (res.data) { this.setState({ todos: res.data }) }
+    }).catch(err => console.log(err))
+  }
+  deleteTodo = (id) => {
+    axios.delete(`/api/todos/${id}`).then(res => {
+      if (res.data) { this.getTodos() }
+    }).catch(err => console.log(err))
+  }
+  render() {
+    let { todos } = this.state;
+    return (
+      <div>
+        <h1>My Todo(s)</h1>
+        <Input getTodos={this.getTodos} />
+        <ListTodo todos={todos} deleteTodo={this.deleteTodo} />
+      </div>
+    )
+  }
+}
+export default Todo;
+
+```
+
+**2. App.js (`client/src/App.js`):**
+
+```javascript
+import React from 'react';
+import Todo from './components/Todo';
+import './App.css';
+
+const App = () => {
+  return (
+    <div className="App">
+      <Todo />
+    </div>
+  );
+}
+export default App;
+
+```
+
+---
