@@ -160,5 +160,18 @@ app.listen(port, () => {
 ```
 
 > **Expected Output:** Running `node index.js` should display established database connection.
+>![Web Preview](screenshoots/3.png)
+---
+
+## Phase 6: Testing Backend API (Postman)
+
+Validate the backend functionality before building the UI:
+
+* **POST Request**: `http://<IP>:5000/api/todos` (Header: `Content-Type: application/json`, Body: `{"action": "Finish Project 8 and 9"}`).
+* **GET Request**: Retrieve tasks to verify persistence.
+* **DELETE Request**: Verify deletion using the unique task `_id`.
+
+> **Expected Output:** A `200 OK` status and JSON data returned from the server.
+>![Web Preview](screenshoots/4.png)
 
 ---
