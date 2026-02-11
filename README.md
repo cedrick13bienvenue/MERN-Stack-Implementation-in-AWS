@@ -1,4 +1,4 @@
-# Project: MERN Stack Implementation on AWS
+# MERN Stack Implementation on AWS
 
 ## Project Overview
 
@@ -41,4 +41,43 @@ touch index.js .env
 
 > **Expected Output:** A `package.json` file should be generated in the directory.
 >![Web Preview](screenshoots/2.png)
+
+---
+
+## Phase 2: Defining the API Routes
+
+### 2.1 Route Folder Setup
+
+```bash
+mkdir routes && cd routes && touch api.js
+
+```
+
+### 2.2 Implementing the API Endpoints (`routes/api.js`)
+
+```javascript
+const express = require('express');
+const router = express.Router();
+const Todo = require('../models/todo');
+
+router.get('/todos', (req, res, next) => {
+  Todo.find({}, 'action').then(data => res.json(data)).catch(next);
+});
+
+router.post('/todos', (req, res, next) => {
+  if (req.body.action) {
+    Todo.create(req.body).then(data => res.json(data)).catch(next);
+  } else {
+    res.json({ error: "The input field is empty" });
+  }
+});
+
+router.delete('/todos/:id', (req, res, next) => {
+  Todo.findOneAndDelete({"_id": req.params.id}).then(data => res.json(data)).catch(next);
+});
+
+module.exports = router;
+
+```
+
 ---
