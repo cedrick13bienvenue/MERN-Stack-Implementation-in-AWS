@@ -81,3 +81,34 @@ module.exports = router;
 ```
 
 ---
+
+## Phase 3: The Data Model (Mongoose)
+
+### 3.1 Model Setup
+
+```bash
+cd ..
+mkdir models && cd models && touch todo.js
+
+```
+
+### 3.2 Defining the Schema (`models/todo.js`)
+
+```javascript
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const TodoSchema = new Schema({
+  action: {
+    type: String,
+    required: [true, 'The todo text field is required']
+  }
+})
+
+const Todo = mongoose.model('todo', TodoSchema);
+module.exports = Todo;
+
+```
+
+
+---
