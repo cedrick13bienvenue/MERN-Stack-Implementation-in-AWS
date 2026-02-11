@@ -12,7 +12,16 @@ To begin, provision a virtual server that will host all four components of the M
 
 * **Instance Provisioning:** Launch a new EC2 Instance of the `t2.micro` family running **Ubuntu Server 24.04 LTS**.
 * **Tagging:** Add a Tag with Key `Name` and Value `MERN-Stack-Server`.
-* **Networking:** Ensure your Security Group allows inbound traffic on **Port 22 (SSH)** and **Port 5000 (Express Default)**.
+* **Networking:** Configure the Security Group with the following **Inbound Rules**:
+
+| Protocol | Port Range | Source | Purpose |
+| --- | --- | --- | --- |
+| SSH | 22 | `0.0.0.0/0` | Remote Terminal Access |
+| Custom TCP | 5000 | `0.0.0.0/0` | Node.js/Express Backend API |
+| Custom TCP | 3000 | `0.0.0.0/0` | React Frontend Dev Server |
+
+> **Expected Output:** The "Inbound rules" tab should confirm three permission entries, specifically showing Ports 3000 and 5000 as open to allow full-stack connectivity.
+>![Web Preview](screenshoots/5.png)
 
 
 ---
