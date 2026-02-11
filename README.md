@@ -259,3 +259,45 @@ export default App;
 ```
 
 ---
+
+## Phase 8: Styling & Execution
+
+### 8.1 Styling (`App.css` and `index.css`)
+
+Custom dark-themed UI:
+
+```css
+/* App.css Content */
+.App { text-align: center; width: 60%; margin: auto; }
+input { height: 40px; width: 50%; border-bottom: 2px #101113 solid; color: #787a80; background: none; }
+button { background: #101113; color: #787a80; border-radius: 5px; height: 45px; width: 25%; cursor: pointer; }
+
+/* index.css Content */
+body { margin: 0; background-color: #282c34; color: #787a80; font-family: -apple-system, sans-serif; }
+
+```
+
+### 8.2 Execution & Deployment
+
+Update root `package.json` scripts:
+
+```json
+"scripts": {
+  "start": "node index.js",
+  "start-watch": "nodemon index.js",
+  "dev": "concurrently \"npm run start-watch\" \"cd client && npm start\""
+}
+
+```
+
+**Launch the application from the root folder:**
+
+```bash
+npm install concurrently nodemon --save-dev
+npm run dev
+
+```
+
+> **Final Verification:** Visit `http://<IP>:3000` to view the live app.
+>![Web Preview](screenshoots/6.png)
+
