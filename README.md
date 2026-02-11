@@ -112,3 +112,53 @@ module.exports = Todo;
 
 
 ---
+
+## Phase 5: Database Connection and Security
+
+### 5.1 Create the .env File
+
+```bash
+cd ..
+touch .env && vim .env
+
+```
+
+**Paste your Atlas string:**
+
+```text
+DB = 'mongodb+srv://<username>:<password>@cluster0.mongodb.net/myTodoDB'
+
+```
+
+### 5.2 Finalizing the Entry Point (`index.js`)
+
+```javascript
+const express = require('express');
+const mongoose = require('mongoose');
+const routes = require('./routes/api');
+require('dotenv').config();
+
+const app = express();
+const port = process.env.PORT || 5000;
+
+mongoose.connect(process.env.DB)
+  .then(() => console.log(`Database connected successfully`))
+  .catch(err => console.log(err));
+
+app.use(express.json());
+app.use('/api', routes);
+
+app.use((err, req, res, next) => {
+  console.log(err);
+  next();
+});
+
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
+
+```
+
+> **Expected Output:** Running `node index.js` should display established database connection.
+
+---
